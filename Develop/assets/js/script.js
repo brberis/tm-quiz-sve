@@ -18,7 +18,7 @@ function stopCountDown() {
 var taskButtonHandler = function (event) {
   // get target element from event
   var targetEl = event.target;
-
+  console.log('start');
   if (targetEl.matches("#start")) {
     countdown = setInterval(setTimer, 1000);
   }
