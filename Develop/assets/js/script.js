@@ -18,13 +18,17 @@ function endQuiz() {
     var scoreHistory = localStorage.getItem("score");
     console.log(scoreHistory);
     if(scoreHistory){
-      scores.push(JSON.parse(scoreHistory));
+      scores = JSON.parse(scoreHistory);
     }
     var newScore = {'user':'CB', 'score':time};
     scores.push(newScore);
     localStorage.setItem('score', JSON.stringify(scores));
     clearInterval(countdown);
-    scoreForm();
+    if (score === 0){
+      window.location.replace("scores.html");
+    }else{
+      scoreForm();
+    }
     }
 
 
