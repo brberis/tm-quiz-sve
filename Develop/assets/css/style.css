@@ -29,7 +29,7 @@ body {
 }
 
 .content {
-  max-width: 900px;
+  width: 900px;
   margin: 50px auto;
   text-align: center;
 }
@@ -76,6 +76,7 @@ p {
 
 .btn:hover {
   color: white;
+  cursor: pointer;
 }
 
 .btn:active {
@@ -84,6 +85,7 @@ p {
 
 .quiz {
   margin-bottom: 50px;
+
 }
 
 .options {
@@ -94,19 +96,18 @@ p {
   width: 300px;
 }
 
-.question {
+.opt {
   display: block;
   border-radius: 8px;
   margin: 10px;
-  width: 250px;
+  width: 300px;
   text-align: left;
 }
 
-.question:hover {
-  color: white;
+.opt:hover {
   background-color: var(--pink);
 }
 
-.question:active {
+.opt:active {
   box-shadow: none;
 }
