@@ -2,7 +2,8 @@ var time = 150;
 var questionNum = 0;
 var countdown = null;
 var scores = [];
-var homeContentEl = document.querySelector("#home");
+var homeEl = document.querySelector("#home");
+var actionsEl = document.querySelector("#actions");
 var quizContentEl = document.querySelector("#question");
 
 function setTimer() {
@@ -23,22 +24,28 @@ function endQuiz() {
     scores.push(newScore);
     localStorage.setItem('score', JSON.stringify(scores));
     clearInterval(countdown);
-    
-    // window.location.href = "scores.htmi";
-}
+    scoreForm();
+    }
 
-var startButtonHandler = function (event) {
+
+
+var buttonHandler = function (event) {
   questionNum = 0;
-  // get target element from event
   var targetEl = event.target;
   if (targetEl.matches("#start")) {
     countdown = setInterval(setTimer, 1000);
     startQuestions();
   }
+  if (targetEl.matches("#back-to-home")) {
+    window.location.replace("index.html");
+  }
+  if (targetEl.matches("#clear-score")) {
+    localStorage.clear("score");
+  }
 };
 
 var startQuestions = function() {
-  homeContentEl.style.display = 'none';
+  homeEl.style.display = 'none';
   
   if (time > 0 && questionNum + 1 <= quiz.length) {
     constructQuestion(questionNum);
@@ -97,5 +104,11 @@ var optionsButtonHandler = function(event) {
 
 }
 
+var scoreForm = function(){
 
-homeContentEl.addEventListener("click", startButtonHandler);
+  window.location.replace("scores.html");
+
+}
+
+
+actionsEl.addEventListener("click", buttonHandler);

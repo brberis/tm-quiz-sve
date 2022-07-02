@@ -11,6 +11,7 @@
   --light: rgb(231, 220, 255);
   --grey: rgb(112, 112, 112);
   --pink: rgb(189, 96, 231);
+  --ligh-pink: rgb(217, 211, 233);
   font-size: 22px;
 }
 
@@ -110,4 +111,20 @@ p {
 
 .opt:active {
   box-shadow: none;
+}
+
+/* high scores start */
+.scores-section{
+  width: 700px;
+  margin: 110px auto;
+}
+
+.score-detail{
+  background-color: var(--ligh-pink);
+  padding: 8px;
+}
+
+
+.scr-btn {
+  margin: 25px 10px 0 0 ;
 }
