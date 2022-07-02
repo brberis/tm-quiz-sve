@@ -8,10 +8,11 @@
   --primary: #000000;
   --secondary: #497980;
   --tertiary: rgb(53, 28, 117);
-  --light: rgb(231, 220, 255);
+  --light: rgb(246, 241, 255);
   --grey: rgb(112, 112, 112);
   --pink: rgb(189, 96, 231);
-  --ligh-pink: rgb(217, 211, 233);
+  --light-pink: rgb(217, 211, 233);
+  --very-light-pink: rgb(243, 240, 250);
   font-size: 22px;
 }
 
@@ -120,8 +121,12 @@ p {
 }
 
 .score-detail{
-  background-color: var(--ligh-pink);
+  background-color: var(--light-pink);
   padding: 8px;
+}
+
+.score-detail-o{
+  background-color: var(--very-light-pink);
 }
 
 

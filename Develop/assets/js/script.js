@@ -41,6 +41,7 @@ var buttonHandler = function (event) {
   }
   if (targetEl.matches("#clear-score")) {
     localStorage.clear("score");
+    window.location.reload();
   }
 };
 
