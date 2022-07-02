@@ -8,7 +8,8 @@
   --primary: #000000;
   --secondary: #497980;
   --tertiary: rgb(53, 28, 117);
-  --grey: #333;
+  --light: rgb(231, 220, 255);
+  --grey: rgb(112, 112, 112);
   font-size: 22px;
 }
 
@@ -18,8 +19,6 @@ a {
 }
 
 body {
-  background: #ededed;
-  color: var(--grey);
   margin: 0;
   padding: 0;
   display: flex;
@@ -59,7 +58,7 @@ p {
   font-size: 28px;
 }
 
-button {
+.btn {
   outline: none;
   border: none;
   display: inline-block;
@@ -71,5 +70,20 @@ button {
   position: relative;
   top: -3px;
   box-shadow: 0 3px var(--grey);
-  color: white;
+  color: var(--light);
 }
+
+.btn:hover {
+  color: white;
+  /* font-weight: bold; */
+  /* box-shadow: 3px 0 var(--grey); */
+}
+
+.btn:active {
+  /* color: white; */
+  /* font-weight: bold; */
+  box-shadow: none;
+
+
+}
+
