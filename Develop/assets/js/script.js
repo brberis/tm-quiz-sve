@@ -4,7 +4,6 @@ var countdown = null;
 var scores = [];
 var homeContentEl = document.querySelector("#home");
 var quizContentEl = document.querySelector("#question");
-console.log(quiz);
 
 function setTimer() {
   document.getElementById("tm").textContent = time;
@@ -15,9 +14,17 @@ function setTimer() {
 }
 
 function endQuiz() {
+    var scoreHistory = localStorage.getItem("score");
+    console.log(scoreHistory);
+    if(scoreHistory){
+      scores.push(JSON.parse(scoreHistory));
+    }
+    var newScore = {'user':'CB', 'score':time};
+    scores.push(newScore);
+    localStorage.setItem('score', JSON.stringify(scores));
     clearInterval(countdown);
     
-    window.location.href = "/scores.htmi";
+    // window.location.href = "scores.htmi";
 }
 
 var startButtonHandler = function (event) {
@@ -72,18 +79,21 @@ var constructQuestion = function (index) {
 
 var optionsButtonHandler = function(event) {
   // var questionId = event.target.getAttribute('data-question-id');
-  var userAnswer = event.target.getAttribute('data-answer');
-  if (userAnswer == quiz[questionNum].answer) {
-    console.log("Correcto");
-  }else{
-    time = time - 15;
+  var targetEl = event.target;
+  if (targetEl.matches(".btn")) {
+    var userAnswer = event.target.getAttribute('data-answer');
+    if (userAnswer == quiz[questionNum].answer) {
+      console.log("Correcto");
+    }else{
+      time = time - 15;
+    }
+    questionNum++
+    var questionInfoEl = document.querySelector(".quiz");
+    var questionOptionsEl = document.querySelector(".options");
+    quizContentEl.removeChild(questionInfoEl);
+    quizContentEl.removeChild(questionOptionsEl);
+    startQuestions();
   }
-  questionNum++
-  var questionInfoEl = document.querySelector(".quiz");
-  var questionOptionsEl = document.querySelector(".options");
-  quizContentEl.removeChild(questionInfoEl);
-  quizContentEl.removeChild(questionOptionsEl);
-  startQuestions();
 
 }
 
