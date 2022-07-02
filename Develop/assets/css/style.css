@@ -10,6 +10,7 @@
   --tertiary: rgb(53, 28, 117);
   --light: rgb(246, 241, 255);
   --grey: rgb(112, 112, 112);
+  --light-grey: rgb(172, 172, 172);
   --pink: rgb(189, 96, 231);
   --light-pink: rgb(217, 211, 233);
   --very-light-pink: rgb(243, 240, 250);
@@ -65,7 +66,7 @@ p {
   outline: none;
   border: none;
   display: inline-block;
-  padding: 10px 20px;
+  padding: 8px 20px;
   margin: 50px;
   background: var(--tertiary);
   font-size: 24px;
@@ -133,3 +134,56 @@ p {
 .scr-btn {
   margin: 25px 10px 0 0 ;
 }
+
+/* result message */
+
+.result {
+  display: none;
+}
+
+.result-message {
+  color: var(--light-grey);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.result-message h3 {
+  font-style: italic;
+  font-size: 48px;;
+}
+
+/* score form */
+
+#score-form-section {
+  display: none;
+}
+
+#score-form {
+  text-align: left;
+}
+
+form input {
+  outline: none;
+  border: none;
+  padding: 12px;
+  width: 350px;
+  /* font-size: 2.2rem; */
+  border: 2px solid var(--grey);
+  border-radius: 8px;
+  margin: auto 10px;
+}
+
+form .form-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 28px;
+  margin: 0 6px 10px 0;
+  flex: 1;
+}
+
+form .btn {
+  margin: 18px 10px;
+}
+
+

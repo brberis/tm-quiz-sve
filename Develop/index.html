@@ -22,6 +22,7 @@
     </nav>
   </header>
   <!-- header end -->
+
   <!-- home section start -->
   <section id="home" class="content">
     <h1>Coding Quiz Challenger</h1>
@@ -31,12 +32,40 @@
     <div id="actions"> 
       <button id="start" class="btn">Start Quiz</button>     
     </div>
-    </section>
+  </section>
   <!-- home section end -->
-    <!-- questions section start -->
-    <section id="question" class="content">
-    </section>
-    <!-- questions section end -->
+
+  <!-- questions section start -->
+  <section id="question" class="content">
+    <!-- quiz childs -->
+  </section>
+  <!-- questions section end -->
+
+  <!-- score form section start -->
+  <section id="score-form-section" class="content">
+    <h1>All done!</h1>
+    <div id="final-score">
+      <p>Your final score is <span id="score"></span></p>
+    </div>
+    <form id="score-form">
+      <div class="form-group">
+        <label for="initials">Enter initials:</label>
+        <input type="text" name="initials" />
+        <button type="submit" class="btn">Submit</button>     
+      </div>
+    </form>
+  </section>
+  <!-- score form section end -->
+
+  <!-- result message -->
+  <section class="result">
+    <div class="result-message">
+      <hr />
+      <h3 id="message">
+        <!-- result -->
+      </h3>
+    </div>
+  </section>
   <script src="./assets/js/quiz.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>

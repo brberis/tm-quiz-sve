@@ -5,6 +5,10 @@ var scores = [];
 var homeEl = document.querySelector("#home");
 var actionsEl = document.querySelector("#actions");
 var quizContentEl = document.querySelector("#question");
+var formEl = document.querySelector("#score-form-section");
+var messageSectionEl = document.querySelector(".result");
+var resultMessageEl = document.querySelector("#message");
+
 
 function setTimer() {
   document.getElementById("tm").textContent = time;
@@ -15,21 +19,13 @@ function setTimer() {
 }
 
 function endQuiz() {
-    var scoreHistory = localStorage.getItem("score");
-    console.log(scoreHistory);
-    if(scoreHistory){
-      scores = JSON.parse(scoreHistory);
-    }
-    var newScore = {'user':'CB', 'score':time};
-    scores.push(newScore);
-    localStorage.setItem('score', JSON.stringify(scores));
-    clearInterval(countdown);
-    if (score === 0){
-      window.location.replace("scores.html");
-    }else{
-      scoreForm();
-    }
-    }
+  clearInterval(countdown);
+  if (time < 1){
+    window.location.replace("scores.html");
+  }else{
+    scoreForm();
+  }
+}
 
 
 
@@ -49,9 +45,13 @@ var buttonHandler = function (event) {
   }
 };
 
-var startQuestions = function() {
+var startQuestions = function(result) {
   homeEl.style.display = 'none';
-  
+  if (result){
+    displayMessage(result);
+  }else{
+    displayMessage();
+  } 
   if (time > 0 && questionNum + 1 <= quiz.length) {
     constructQuestion(questionNum);
   }else{
@@ -83,11 +83,10 @@ var constructQuestion = function (index) {
     questionOptionsEl.appendChild(optionEl);
   }
 
-
   quizContentEl.addEventListener("click", optionsButtonHandler);  
 
-
 }
+
 
 var optionsButtonHandler = function(event) {
   // var questionId = event.target.getAttribute('data-question-id');
@@ -95,24 +94,60 @@ var optionsButtonHandler = function(event) {
   if (targetEl.matches(".btn")) {
     var userAnswer = event.target.getAttribute('data-answer');
     if (userAnswer == quiz[questionNum].answer) {
-      console.log("Correcto");
+      var resullt = "Correct!"
     }else{
       time = time - 15;
+      var resullt = "Wrong!"
     }
     questionNum++
     var questionInfoEl = document.querySelector(".quiz");
     var questionOptionsEl = document.querySelector(".options");
     quizContentEl.removeChild(questionInfoEl);
     quizContentEl.removeChild(questionOptionsEl);
-    startQuestions();
+    startQuestions(resullt);
   }
 
 }
 
 var scoreForm = function(){
+  homeEl.style.display = "none";
+  quizContentEl.style.display = "none";
+  formEl.style.display = "block";
+  formEl.addEventListener("submit", scoreFormHandler);
+  var finalScoreEl = document.querySelector("#score");
+  finalScoreEl.textContent = time;
+}
 
-  window.location.replace("scores.html");
+var scoreFormHandler = function (event) {
+  event.preventDefault();
+  var initialsInput = document.querySelector("input[name='initials']").value;
+  var scoreHistory = localStorage.getItem("score");
+  if(scoreHistory){
+    scores = JSON.parse(scoreHistory);
+  }
+  var newScore = {'user': initialsInput, 'score':time};
+  scores.push(newScore);
+  localStorage.setItem('score', JSON.stringify(scores));
+  if (initialsInput.length > 0){
+    window.location.replace("scores.html");
+  }
+}
 
+var displayMessage = function(message) {
+  if(message){
+    resultMessageEl.textContent = message;
+    messageSectionEl.style.display = "block";
+    setTimeout(function(){
+      noneDisplayMessage();
+    }, 3000);
+  }else{
+    noneDisplayMessage();
+  }
+}
+
+var noneDisplayMessage = function(message) {
+  resultMessageEl.textContent = "";
+  messageSectionEl.style.display = "none";
 }
 
 
