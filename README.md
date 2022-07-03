@@ -43,7 +43,7 @@ Cristobal A Barberis
 
 * 0.1
     * Pure JavaScript.
-    * See [insights](https://github.com/brberis/js-pswd-gen/pulse)
+    * See [insights](https://github.com/brberis/tm-quiz-sve/pulse)
 
 
 
