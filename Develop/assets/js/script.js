@@ -3,12 +3,13 @@
 * @version 0.1, 07/02/22
 */
 
+// globals
 var time = 150;
 var questionNum = 0;
 var countdown = null;
 var scores = [];
 
-//main query selectors
+// main query selectors
 var homeEl = document.querySelector("#home");
 var actionsEl = document.querySelector("#actions");
 var quizContentEl = document.querySelector("#question");
@@ -16,7 +17,7 @@ var formEl = document.querySelector("#score-form-section");
 var messageSectionEl = document.querySelector(".result");
 var resultMessageEl = document.querySelector("#message");
 
-//timer
+// timer
 function setTimer() {
   document.getElementById("tm").textContent = time;
   if (time < 1) {
@@ -29,12 +30,12 @@ function setTimer() {
 function endQuiz() {
   clearInterval(countdown);
   if (time < 1){
+    localStorage.setItem('last-score', 'zero');
     window.location.replace("scores.html");
   }else{
     scoreForm();
   }
 }
-
 
 // main buttons handler
 var buttonHandler = function (event) {
@@ -48,7 +49,7 @@ var buttonHandler = function (event) {
     window.location.replace("index.html");
   }
   if (targetEl.matches("#clear-score")) {
-    localStorage.clear("score");
+    localStorage.removeItem("score");
     window.location.reload();
   }
 };
@@ -66,7 +67,6 @@ var startQuestions = function(result) {
   }else{
     endQuiz();
   }
-
 } 
 
 // quiz question constructor
@@ -76,7 +76,6 @@ var constructQuestion = function (index) {
   questionInfoEl.className = "quiz";
   questionInfoEl.innerHTML = "<h2>" + quiz[index].question;
   quizContentEl.appendChild(questionInfoEl);
-
   var questionOptionsEl = document.createElement("div");
   questionOptionsEl.className = "options";
   quizContentEl.appendChild(questionOptionsEl);
@@ -105,7 +104,7 @@ var optionsButtonHandler = function(event) {
     if (userAnswer == quiz[questionNum].answer) {
       var resullt = "Correct!"
     }else{
-      time = time - 15;
+      time = time - 10;
       var resullt = "Wrong!"
     }
     questionNum++
@@ -115,7 +114,6 @@ var optionsButtonHandler = function(event) {
     quizContentEl.removeChild(questionOptionsEl);
     startQuestions(resullt);
   }
-
 }
 
 // score user form starter
@@ -126,7 +124,7 @@ var scoreForm = function(){
   // local listener
   formEl.addEventListener("submit", scoreFormHandler);
   var finalScoreEl = document.querySelector("#score");
-  finalScoreEl.textContent = time;
+  finalScoreEl.textContent = time + 1;
 }
 
 // score form response handler / local storage record
@@ -137,10 +135,10 @@ var scoreFormHandler = function (event) {
   if(scoreHistory){
     scores = JSON.parse(scoreHistory);
   }
-  var newScore = {'user': initialsInput, 'score':time};
-  scores.push(newScore);
-  localStorage.setItem('score', JSON.stringify(scores));
   if (initialsInput.length > 0){
+    var newScore = {'user': initialsInput, 'score':time};
+    scores.push(newScore);
+    localStorage.setItem('score', JSON.stringify(scores));
     window.location.replace("scores.html");
   }
 }
@@ -152,7 +150,7 @@ var displayMessage = function(message) {
     messageSectionEl.style.display = "block";
     setTimeout(function(){
       noneDisplayMessage();
-    }, 3000);
+    }, 5000);
   }else{
     noneDisplayMessage();
   }

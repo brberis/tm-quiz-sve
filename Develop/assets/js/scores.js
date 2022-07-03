@@ -5,6 +5,13 @@
 
 // show user scores / scores.html
 var showScores = function(){
+  var lastScore = localStorage.getItem("last-score");
+  if (lastScore === "zero"){
+    displayMessage("Your are not here because your score is 0.");
+  }else{
+    displayMessage();
+  } 
+  localStorage.removeItem("last-score");
   var scoreListEl = document.querySelector("#scores");
   var scores = localStorage.getItem("score");
   if(scores){
