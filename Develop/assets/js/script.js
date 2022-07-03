@@ -1,7 +1,14 @@
+/**
+* @author  Cristobal A Barberis
+* @version 0.1, 07/02/22
+*/
+
 var time = 150;
 var questionNum = 0;
 var countdown = null;
 var scores = [];
+
+//main query selectors
 var homeEl = document.querySelector("#home");
 var actionsEl = document.querySelector("#actions");
 var quizContentEl = document.querySelector("#question");
@@ -9,7 +16,7 @@ var formEl = document.querySelector("#score-form-section");
 var messageSectionEl = document.querySelector(".result");
 var resultMessageEl = document.querySelector("#message");
 
-
+//timer
 function setTimer() {
   document.getElementById("tm").textContent = time;
   if (time < 1) {
@@ -18,6 +25,7 @@ function setTimer() {
   time--;
 }
 
+// end quiz routing
 function endQuiz() {
   clearInterval(countdown);
   if (time < 1){
@@ -28,7 +36,7 @@ function endQuiz() {
 }
 
 
-
+// main buttons handler
 var buttonHandler = function (event) {
   questionNum = 0;
   var targetEl = event.target;
@@ -45,6 +53,7 @@ var buttonHandler = function (event) {
   }
 };
 
+// quiz question routine
 var startQuestions = function(result) {
   homeEl.style.display = 'none';
   if (result){
@@ -60,7 +69,7 @@ var startQuestions = function(result) {
 
 } 
 
-
+// quiz question constructor
 var constructQuestion = function (index) {
   // questionContentEl.
   var questionInfoEl = document.createElement("div");
@@ -72,7 +81,7 @@ var constructQuestion = function (index) {
   questionOptionsEl.className = "options";
   quizContentEl.appendChild(questionOptionsEl);
 
-
+  // options button generator
   for (var i = 0; i < quiz[index].options.length; i++) {
     var option = quiz[index].options[i];
     var optionEl = document.createElement("buttom");
@@ -82,12 +91,12 @@ var constructQuestion = function (index) {
     optionEl.textContent = (i+1) + ". " + option;
     questionOptionsEl.appendChild(optionEl);
   }
-
+  // local listener (don't move to the end)
   quizContentEl.addEventListener("click", optionsButtonHandler);  
 
 }
 
-
+// quiz option handler and solution check
 var optionsButtonHandler = function(event) {
   // var questionId = event.target.getAttribute('data-question-id');
   var targetEl = event.target;
@@ -109,15 +118,18 @@ var optionsButtonHandler = function(event) {
 
 }
 
+// score user form starter
 var scoreForm = function(){
   homeEl.style.display = "none";
   quizContentEl.style.display = "none";
   formEl.style.display = "block";
+  // local listener
   formEl.addEventListener("submit", scoreFormHandler);
   var finalScoreEl = document.querySelector("#score");
   finalScoreEl.textContent = time;
 }
 
+// score form response handler / local storage record
 var scoreFormHandler = function (event) {
   event.preventDefault();
   var initialsInput = document.querySelector("input[name='initials']").value;
@@ -133,6 +145,7 @@ var scoreFormHandler = function (event) {
   }
 }
 
+// display message at the bottom / timeout
 var displayMessage = function(message) {
   if(message){
     resultMessageEl.textContent = message;
@@ -145,10 +158,11 @@ var displayMessage = function(message) {
   }
 }
 
+// delete message
 var noneDisplayMessage = function(message) {
   resultMessageEl.textContent = "";
   messageSectionEl.style.display = "none";
 }
 
-
+// buttons section listener
 actionsEl.addEventListener("click", buttonHandler);

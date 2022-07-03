@@ -1,3 +1,9 @@
+/**
+* @author  Cristobal A Barberis
+* @version 0.1, 07/02/22
+*/
+
+// show user scores / scores.html
 var showScores = function(){
   var scoreListEl = document.querySelector("#scores");
   var scores = localStorage.getItem("score");
@@ -5,7 +11,7 @@ var showScores = function(){
     // print scores
     scores = JSON.parse(scores);
 
-    //order by score desc 
+    // order by score desc 
     scores.sort( function ( a, b ) { return b.score - a.score; } );
 
     for (var i = 0; i < scores.length; i++) {
